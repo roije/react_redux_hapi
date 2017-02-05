@@ -78,7 +78,7 @@ if (isProduction) {
     path: '/dist/{path*}',
     handler: {
       directory: {
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, '/dist'),
         listing: false,
         index: true
       }
