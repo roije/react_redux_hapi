@@ -91,7 +91,7 @@ if (isProduction) {
     method: 'GET',
     path: '/{p*}',
     handler: function(request, reply) {
-      reply.file('../dist/index.html');
+      reply.file('./dist/index.html');
     },
     config: { auth: false }
   });
