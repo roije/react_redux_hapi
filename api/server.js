@@ -71,6 +71,7 @@ if(process.env.NODE_ENV !== 'production'){
 /**** PRODUCTION ONLY ****/
 
 if (isProduction) {
+  server.register(inert, () => {});
   // Serve assets
   server.route({
     method: 'GET',
