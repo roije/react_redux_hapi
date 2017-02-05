@@ -7,11 +7,18 @@ const inert = require('inert');
 
 const server = new Hapi.Server();
 
+const isDevelopment = (process.env.NODE_ENV !== 'production');
+const isProduction = !isDevelopment;
+
+console.log(isProduction);
+
 //Only used for development mode
 const host = 'localhost';
 
 const port =  process.env.PORT || 3000;
 server.connection({ port });
+
+server.register(inert, () => {});
 
 if(process.env.NODE_ENV !== 'production'){
   const webpack = require('webpack');
@@ -51,17 +58,44 @@ if(process.env.NODE_ENV !== 'production'){
       return reply.continue();
     });
   });
+
+  server.route({
+    method: 'GET',
+    path: '/{p*}',
+    handler: function (request, reply) {
+      reply.file('./dist/index.html');
+    }
+  });
 }
 
-server.register(inert, () => {});
+/**** PRODUCTION ONLY ****/
+/*
+if (isProduction) {
+  // Serve assets
+  server.route({
+    method: 'GET',
+    path: '/dist/{path*}',
+    handler: {
+      directory: {
+        path: './dist',
+        listing: false,
+        index: true
+      }
+    },
+    config: { auth: false }
+  });
 
-server.route({
-  method: 'GET',
-  path: '/{p*}',
-  handler: function (request, reply) {
-    reply.file('./dist/index.html');
-  }
-});
+  // Handle SPA routes
+  server.route({
+    method: 'GET',
+    path: '/{p*}',
+    handler: function(request, reply) {
+      reply.file('./dist/index.html');
+    },
+    config: { auth: false }
+  });
+}
+*/
 
 // Start server
 server.start(() => {
