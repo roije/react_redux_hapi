@@ -74,19 +74,20 @@ if (isProduction) {
   server.register(inert, () => {});
   // Serve assets
 
+  server.register(require('inert'), (err) => { if (err) { throw err; } });
+  // Serve assets
   server.route({
     method: 'GET',
-    path: '/{path*}',
+    path: '/assets/{path*}',
     handler: {
       directory: {
-        path: path.join(__dirname, '/dist'),
+        path: './dist/assets',
         listing: false,
         index: true
       }
     },
     config: { auth: false }
   });
-
 
   // Handle SPA routes
   server.route({

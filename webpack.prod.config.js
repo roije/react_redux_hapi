@@ -8,9 +8,9 @@ module.exports = {
   devtool: 'source-map',
   entry: ['./src/index'],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, '/dist/assets'),
     filename: 'bundle.js',
-    publicPath: '/'
+    publicPath: '/assets/'
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
