@@ -6,9 +6,12 @@ const Hapi = require('hapi');
 const inert = require('inert');
 
 const server = new Hapi.Server();
+
+//Only used for development mode
 const host = 'localhost';
+
 const port =  process.env.PORT || 3000;
-server.connection({ host, port });
+server.connection({ port });
 
 if(process.env.NODE_ENV !== 'production'){
   const webpack = require('webpack');
