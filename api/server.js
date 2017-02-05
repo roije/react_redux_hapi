@@ -77,7 +77,7 @@ if (isProduction) {
     path: '/dist/{path*}',
     handler: {
       directory: {
-        path: './dist',
+        path: '../dist',
         listing: false,
         index: true
       }
