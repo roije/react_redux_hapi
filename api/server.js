@@ -90,8 +90,7 @@ if (isProduction) {
     method: 'GET',
     path: '/{p*}',
     handler: function(request, reply) {
-      console.log('Her 1')
-      reply.file('./dist/index.html');
+      reply.file('../dist/index.html');
     },
     config: { auth: false }
   });
