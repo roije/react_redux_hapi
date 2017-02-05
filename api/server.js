@@ -69,7 +69,7 @@ if(process.env.NODE_ENV !== 'production'){
 }
 
 /**** PRODUCTION ONLY ****/
-/*
+
 if (isProduction) {
   // Serve assets
   server.route({
@@ -95,7 +95,7 @@ if (isProduction) {
     config: { auth: false }
   });
 }
-*/
+
 
 // Start server
 server.start(() => {
