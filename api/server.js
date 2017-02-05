@@ -73,10 +73,10 @@ if(process.env.NODE_ENV !== 'production'){
 if (isProduction) {
   server.register(inert, () => {});
   // Serve assets
-  /*
+
   server.route({
     method: 'GET',
-    path: '/dist/{path*}',
+    path: '/{path*}',
     handler: {
       directory: {
         path: path.join(__dirname, '/dist'),
@@ -86,7 +86,7 @@ if (isProduction) {
     },
     config: { auth: false }
   });
-  */
+
 
   // Handle SPA routes
   server.route({
