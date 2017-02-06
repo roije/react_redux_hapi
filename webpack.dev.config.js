@@ -31,7 +31,8 @@ module.exports = {
       },
       {
         test: /\.s?css$/,
-        loader: 'style!css!sass'
+        loader: 'style!css!sass',
+        include: ['./node_modules/']
       },
       {
         test: /\.png/,

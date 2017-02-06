@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import { render } from 'react-dom';
-import App from './components/App';
+import {Router, browserHistory} from 'react-router';
+import routes from './routes'
 
-render(<App name='From React'/>, document.getElementById('root'));
+render(<Router history={browserHistory} routes={routes}/>, document.getElementById('root'));
