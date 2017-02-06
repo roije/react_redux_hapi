@@ -59,6 +59,8 @@ if(process.env.NODE_ENV !== 'production'){
     });
   });
 
+
+
   server.route({
     method: 'GET',
     path: '/{p*}',
@@ -66,6 +68,7 @@ if(process.env.NODE_ENV !== 'production'){
       reply.file('./dist/index.html');
     }
   });
+
 }
 
 /**** PRODUCTION ONLY ****/

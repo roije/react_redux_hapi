@@ -47,8 +47,8 @@ module.exports = {
     extensions: ['.js', '.jsx']
   },
   output: {
-    path: path.join(__dirname, '/dist'),
-    publicPath: '/',
+    path: path.join(__dirname, '/dist/assets'),
+    publicPath: '/assets/',
     filename: 'bundle.js'
   },
   devServer: {
