@@ -18,6 +18,9 @@ const host = 'localhost';
 const port =  process.env.PORT || 3000;
 server.connection({ port });
 
+//Server API routes
+server.route(require('./routes'));
+
 server.register(inert, () => {});
 
 if(process.env.NODE_ENV !== 'production'){
