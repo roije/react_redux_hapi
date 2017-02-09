@@ -12,7 +12,10 @@ module.exports = [
     handler: (request, reply) => {
       const validate = validateInput(request.payload);
 
-      if(!validate.isValid) {
+      if(validate.isValid) {
+        reply({ success: true}).code(200);
+      }
+      else {
         reply(validate.errors).code(400);
       }
     }
