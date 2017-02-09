@@ -1,7 +1,7 @@
 /**
  * Created by roije on 2/6/17.
  */
-const validateInput = require('./helpers/validateSignUp');
+const validateInput = require('./shared/validations/validateSignUp');
 
 module.exports = [
 
