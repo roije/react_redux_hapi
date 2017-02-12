@@ -5,6 +5,7 @@ import { ADD_FLASH_MESSAGE, DELETE_FLASH_MESSAGE } from '../types'
 import shortid from 'shortid';
 import findIndex from 'lodash/findIndex';
 
+//A reducers takes a state and action and returns a new state
 export default(state = [], action = {}) => {
   switch (action.type){
     case ADD_FLASH_MESSAGE:
