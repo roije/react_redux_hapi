@@ -24,6 +24,7 @@
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
     "css-loader": "^0.26.1",
+    "dotenv": "^4.0.0",
     "hapi": "^16.1.0",
     "hapi-swagger": "^7.6.0",
     "inert": "^4.1.0",

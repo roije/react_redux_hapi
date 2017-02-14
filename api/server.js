@@ -7,6 +7,8 @@ const inert = require('inert');
 const vision = require('vision');
 const HapiSwagger = require('hapi-swagger');
 const Pack = require('../package.json');
+require('dotenv').config()
+
 
 const options = {
   info: {
