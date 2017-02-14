@@ -25,6 +25,7 @@
     "classnames": "^2.2.5",
     "css-loader": "^0.26.1",
     "hapi": "^16.1.0",
+    "hapi-swagger": "^7.6.0",
     "inert": "^4.1.0",
     "jquery": "^3.1.1",
     "knex": "^0.12.6",
@@ -42,6 +43,7 @@
     "shortid": "^2.2.6",
     "style-loader": "^0.13.1",
     "validator": "^6.2.1",
+    "vision": "^4.1.1",
     "webpack": "^2.2.1"
   },
   "devDependencies": {

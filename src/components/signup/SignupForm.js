@@ -126,6 +126,8 @@ class SignupForm extends React.Component{
         </div>
       </form>
     )
+
+
   }
 }
 
@@ -140,3 +142,13 @@ SignupForm.contextTypes = {
 }
 
 export default SignupForm;
+
+/*
+ <Ingredient name={ingredient.NAME}
+ clnt_id={ingredient.CLNT_ID}
+ human_id={ingredient.HUMANID}
+ description={ingredient.DESCRIPTION}
+ group_id={ingredient.GROUPID}
+ frida_id={ingredient.FRIDA_ID}
+ />
+ */

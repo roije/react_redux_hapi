@@ -4,6 +4,16 @@
 const path = require('path');
 const Hapi = require('hapi');
 const inert = require('inert');
+const vision = require('vision');
+const HapiSwagger = require('hapi-swagger');
+const Pack = require('../package.json');
+
+const options = {
+  info: {
+    'title' : 'Rem React Redux Hapi Project documentation',
+    'version' : Pack.version
+  }
+}
 
 const server = new Hapi.Server();
 
@@ -22,6 +32,15 @@ server.connection({ port });
 server.route(require('./routes'));
 
 server.register(inert, () => {});
+
+//Register hapi-swagger
+server.register([
+  vision,
+  {
+    'register': HapiSwagger,
+    'option' : options
+  }
+])
 
 if(process.env.NODE_ENV !== 'production'){
   const webpack = require('webpack');
