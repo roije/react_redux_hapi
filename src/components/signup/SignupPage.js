@@ -22,13 +22,4 @@ class SignupPage extends React.Component{
   }
 }
 
-//Requires to receive props
-SignupPage.propTypes = {
-  userSignupRequest: React.PropTypes.func.isRequired,
-  addFlashMessage: React.PropTypes.func.isRequired,
-  isUserExists: React.PropTypes.func.isRequired,
-}
-
-//2nd parameter is mapDispatchToProps
-export default connect(
-  null, { userSignupRequest, addFlashMessage, isUserExists })(SignupPage);
+export default SignupPage;
