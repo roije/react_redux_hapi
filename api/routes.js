@@ -59,5 +59,21 @@ module.exports = [
       notes: 'Saves user in database if successfull and replies with "Success" or "Error" message',
       tags: ['api']
     }
+  },
+
+  {
+    method: 'GET',
+    path: '/api/users/{identifier}',
+    config: {
+      handler: (request, reply) => {
+        User.query({
+          select: ['username', 'email'],
+          where: {email : request.params.identifier},
+          orWhere: {username: request.params.identifier}
+        }).fetch().then(user => {
+          reply({ user });
+        })
+      }
+    }
   }
 ]

@@ -8,6 +8,10 @@ import classnames from 'classnames';
 import validateInput from '../../../api/shared/validations/validateSignUp';
 import TextFieldGroup from './common/TextFieldGroup';
 
+import { connect } from 'react-redux';
+import { userSignupRequest, isUserExists } from '../../actions/signupActions';
+import { addFlashMessage }from '../../actions/flashMessages';
+
 class SignupForm extends React.Component{
 
   constructor(props) {
@@ -19,11 +23,13 @@ class SignupForm extends React.Component{
       passwordConfirmation: '',
       timeZone: '',
       errors: {},
-      isLoading: false
+      isLoading: false,
+      invalid: false
     };
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.checkUserExists = this.checkUserExists.bind(this);
   }
 
   onChange(e) {
@@ -43,7 +49,6 @@ class SignupForm extends React.Component{
   }
 
   onSubmit(e){
-    //Clear errors on submit
     e.preventDefault();
 
     if(this.isValid()) {
@@ -61,6 +66,26 @@ class SignupForm extends React.Component{
     }
   }
 
+  checkUserExists(e) {
+
+    const field = e.target.name;
+    const val = e.target.value;
+
+    if(val !== '') {
+      this.props.isUserExists(val).then(res => {
+        var errors = this.state.errors;
+        var invalid;
+        if(res.data.user) {
+          errors[field] = 'There is a user with such ' + field;
+          invalid = true;
+        } else {
+          errors[field] = '';
+          invalid = false;
+        }
+        this.setState({ errors, invalid })
+      })
+    }
+  }
 
   render() {
 
@@ -80,7 +105,9 @@ class SignupForm extends React.Component{
           label="Username"
           error={errors.username}
           type="text"
-          onChange={this.onChange}/>
+          onChange={this.onChange}
+          checkUserExists={this.checkUserExists}
+        />
 
         <TextFieldGroup
           field="email"
@@ -88,7 +115,9 @@ class SignupForm extends React.Component{
           label="Email"
           error={errors.email}
           type="email"
-          onChange={this.onChange}/>
+          onChange={this.onChange}
+          checkUserExists={this.checkUserExists}
+        />
 
         <TextFieldGroup
           field="password"
@@ -122,7 +151,7 @@ class SignupForm extends React.Component{
         </div>
 
         <div className="form-group">
-          <button disabled={this.state.isLoading} className="btn btn-primary btn-lg">Sign up</button>
+          <button disabled={this.state.isLoading || this.state.invalid} className="btn btn-primary btn-lg">Sign up</button>
         </div>
       </form>
     )
@@ -134,14 +163,18 @@ class SignupForm extends React.Component{
 //Requires to receive props
 SignupForm.propTypes = {
   userSignupRequest: React.PropTypes.func.isRequired,
-  addFlashMessage: React.PropTypes.func.isRequired
+  addFlashMessage: React.PropTypes.func.isRequired,
+  isUserExists: React.PropTypes.func.isRequired
 }
 
 SignupForm.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
-export default SignupForm;
+//2nd parameter is mapDispatchToProps
+export default connect(
+  null, { userSignupRequest, addFlashMessage, isUserExists })(SignupForm);
+
 
 /*
  <Ingredient name={ingredient.NAME}
