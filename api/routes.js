@@ -5,6 +5,8 @@ const commonValidations = require('./shared/validations/validateSignUp');
 const bcrypt = require('bcrypt');
 const User = require('./models/user');
 const isEmpty = require('lodash/isEmpty')
+const jwt = require('jsonwebtoken');
+const config = require('../config')
 
 function validateInput(data, otherValidations) {
   var errors = otherValidations(data).errors;
@@ -75,5 +77,44 @@ module.exports = [
         })
       }
     }
+  },
+
+  {
+    method: 'POST',
+    path: '/api/auth',
+    config: {
+      handler: (request, reply) => {
+        const identifier = request.payload.identifier;
+        const password = request.payload.password;
+
+        User.query({
+          where: { username: identifier},
+          orWhere: { email: identifier}
+        }).fetch().then(user => {
+          if(user) {
+            if(bcrypt.compareSync(password, user.get('password_digest'))){
+
+              //Sign takes two arguements.
+              //The first on is a payload. Something we can decode on the client
+              //Dont give the payload object any private information
+              //The second argument is the secret (env.JWT_SECRET)
+              const token = jwt.sign({
+                id: user.get('id'),
+                username: user.get('username')
+              }, config.jwtSecret);
+
+              reply({ token });
+            }
+            else{
+              reply({ errors: { form: 'Invalid credentials'}}).code(401)
+            }
+          }
+          else{
+            reply({ errors: { form: 'Invalid credentials'}}).code(401)
+          }
+        })
+      }
+    }
   }
+
 ]

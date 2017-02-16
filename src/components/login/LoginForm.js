@@ -64,6 +64,9 @@ class LoginForm extends Component {
     return(
       <form onSubmit={this.onSubmit}>
         <h1>Login</h1>
+
+        { errors.form && <div className="alert alert-danger">{errors.form}</div> }
+
         <TextFieldGroup
           field="identifier"
           value={identifier}
