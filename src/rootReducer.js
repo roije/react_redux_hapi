@@ -4,8 +4,10 @@
 import { combineReducers } from 'redux';
 
 import flashMessages from './reducers/flashMessagesReducer'
+import auth from './reducers/authReducer'
 
 //All reducers combined into one state object
 export default combineReducers({
-  flashMessages
+  flashMessages,
+  auth
 })

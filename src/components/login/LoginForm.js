@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 import TextFieldGroup from '../signup/common/TextFieldGroup';
 import validateInput from '../../../api/shared/validations/validateLogin';
 import { connect } from 'react-redux';
-import { login } from '../../actions/loginActions';
+import { login } from '../../actions/authActions';
 
 class LoginForm extends Component {
 

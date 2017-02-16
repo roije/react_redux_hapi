@@ -25,7 +25,7 @@ module.exports = {
       },
       {
         test: /\.json$/,
-        loader: 'json'
+        loader: 'json-loader'
       },
       {
         test   : /\.woff|\.woff2|\.svg|.eot|\.ttf/,
@@ -62,5 +62,9 @@ module.exports = {
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-  ]
+  ],
+  node: {
+      net: 'empty',
+      dns: 'empty'
+  }
 }
